@@ -16,6 +16,8 @@ qemu-system-x86_64 \
 	-vga qxl \
 	-spice port=${SPICE_PORT},disable-ticketing=true \
 	-monitor telnet:127.0.0.1:${TELNET_PORT},server,nowait \
+	-tpmdev passthrough,id=tpm0,path=/dev/tpm0 \
+	-device tpm-tis,tpmdev=tpm0 \
 	-k de \
 	-name "Windows" \
 	"$@"
@@ -40,6 +42,9 @@ qemu-system-x86_64 \
 # -monitor: provide a QEMU-Terminal to communicate with the hypervisor.
 #	    "telnet" provides a serial terminal via Telnet.
 #	    Listening on 127.0.0.1 means that only the host can connect to the Telnet terminal
+# -tpmdev: set up a tpm device for windows. The tpm device can be emulated or a pass-through for an existing
+#	   device can be used. Use this in combination with the following line:
+# -device tpm-tis: provide a TPM-interface following the TPM interface specification.
 # -k: specify Keyboard-Layout
 # -name: give the VM a name
 # -daemonize: start VM as a daemon in the background
