@@ -18,10 +18,14 @@ qemu-system-x86_64 \
 	-monitor telnet:127.0.0.1:${TELNET_PORT},server,nowait \
 	-tpmdev passthrough,id=tpm0,path=/dev/tpm0 \
 	-device tpm-tis,tpmdev=tpm0 \
+	-object rng-random,filename=/dev/urandom,id=rng0 \
+	-device virtio-rng-pci,rng=rng0 \
 	-k de \
 	-name "Windows" \
 	"$@"
+#	-usbdevice tablet \
 #	-daemonize \
+
 
 ## Parameter-explaination
 # -nodefaults: remove default configuration, p.ex. a floppy-interface
@@ -45,8 +49,13 @@ qemu-system-x86_64 \
 # -tpmdev: set up a tpm device for windows. The tpm device can be emulated or a pass-through for an existing
 #	   device can be used. Use this in combination with the following line:
 # -device tpm-tis: provide a TPM-interface following the TPM interface specification.
+# -object rng-random: emulate a hardware random number generator. Use as virtio devie with:
+# -device virtio-rng-pci: host frontend for the random number generator
 # -k: specify Keyboard-Layout
 # -name: give the VM a name
+## uncommented options:
+# -usbdevice tablet: configure the mouse as a touchscreen / tablet and not as a classis mouse.
+#		     this improves the interface for the spice client.
 # -daemonize: start VM as a daemon in the background
 # "$@" add all parameters given to this bash-script as a string to this command. commonly used at the end of the command.
 
