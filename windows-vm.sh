@@ -24,6 +24,7 @@ qemu-system-x86_64 \
 	-name "Windows" \
 	"$@"
 #	-usbdevice tablet \
+#	-soundhw hda \
 #	-daemonize \
 
 
@@ -56,6 +57,7 @@ qemu-system-x86_64 \
 ## uncommented options:
 # -usbdevice tablet: configure the mouse as a touchscreen / tablet and not as a classis mouse.
 #		     this improves the interface for the spice client.
+# -soundhw hda: add a virtual high definition audio interface to the spice server
 # -daemonize: start VM as a daemon in the background
 # "$@" add all parameters given to this bash-script as a string to this command. commonly used at the end of the command.
 
