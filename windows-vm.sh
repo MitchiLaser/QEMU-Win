@@ -10,7 +10,7 @@ qemu-system-x86_64 \
 	-cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time \
 	-smp 2 \
 	-m 8G \
-	-drive format=raw,file=/dev/sdb \
+	-drive format=raw,file=/dev/sda \
 	-boot c \
 	-nic user,model=virtio-net-pci \
 	-vga qxl \
